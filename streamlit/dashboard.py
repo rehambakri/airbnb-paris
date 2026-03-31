@@ -16,7 +16,7 @@ st.markdown("Explore Airbnb listings data for Paris")
 @st.cache_data
 def load_data():
     # Use the new parquet file
-    df = pd.read_parquet('paris_airbnb_cleaned.parquet')
+    df = pd.read_parquet('../data/cleaned/paris_airbnb_cleaned.parquet')
     return df
 
 viz_df = load_data()
