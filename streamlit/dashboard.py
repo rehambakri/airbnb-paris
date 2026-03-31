@@ -4,6 +4,7 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 from datetime import datetime
+from pathlib import Path
 
 # Set page config
 st.set_page_config(page_title="Airbnb Paris Dashboard", page_icon="🏠", layout="wide")
@@ -15,9 +16,11 @@ st.markdown("Explore Airbnb listings data for Paris")
 # Load data
 @st.cache_data
 def load_data():
-    # Use the new parquet file
-    df = pd.read_parquet('../data/cleaned/paris_airbnb_cleaned.parquet')
-    return df
+    current_dir = Path(__file__).parent
+    
+    file_path = (current_dir / "paris_airbnb_cleaned.parquet").resolve()
+    
+    return pd.read_parquet(file_path)
 
 viz_df = load_data()
 
