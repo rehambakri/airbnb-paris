@@ -1,3 +1,5 @@
 *.csv
 airbnb-paris/data/raw
 *.png
+__pycache__/
+*.py[cod]
