@@ -1,42 +1,116 @@
-## 🚀 Streamlit Dashboard
 
-An interactive web dashboard has been created to visualize the Airbnb Paris data.
+## 🛠️ Technical Stack
 
-### Features
-
-- 📊 Price distribution analysis with interactive filters
-- 🗺️ Neighbourhood listing counts (top 20)
-- 🏠 Bedrooms vs price correlation by room type
-- 🔍 Interactive filters for price range, room types, and neighbourhoods
-- 📋 Data table with sample listings
-- 📈 Real-time statistics and metrics
-
-### Running the Dashboard
-
-1. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-2. Run the dashboard:
-   ```bash
-   streamlit run dashboard.py
-   ```
-
-3. Open your browser to `http://localhost:8501`
-
-### Deployment
-
-The dashboard can be deployed to Streamlit Cloud or other platforms:
-
-1. Push this code to a GitHub repository
-2. Go to [share.streamlit.io](https://share.streamlit.io)
-3. Connect your GitHub repo and deploy!
+- **Language**: Python 3.12
+- **Web Framework**: Streamlit
+- **Data Libraries**: Pandas, NumPy, Matplotlib, Seaborn, SciPy
+- **Environment**: Ubuntu (Linux)
 
 ---
 
-# airbnb-paris
-Airbnb Listings and Reviews in Paris – Analysis of Trends, Pricing
+## 🧹 Data Cleaning & Engineering
 you can download the dataset using this link : https://www.kaggle.com/datasets/abaghyangor/airbnb-paris/data
 
- Paris Airbnb Data Cleaning & EngineeringThis repository contains the data preprocessing pipeline for the Global Airbnb Dataset (Paris, 2026). The project transforms a raw, noisy dataset into a high-integrity source optimized for Exploratory Data Analysis (EDA) and Visualization.🛠️ Technical StackLanguage: Python 3.12Libraries: Pandas, NumPy, Matplotlib, SeabornEnvironment: Ubuntu (Linux) Development Environment🧹 Data Engineering Highlights1. Advanced Outlier ManagementTo ensure visualizations represent the "true" Paris market rather than data entry errors (e.g., 50-bedroom listings), a hybrid outlier strategy was implemented:Price (Continuous): Applied the Interquartile Range (IQR) method ($Q3 + 1.5 \times IQR$) to identify the statistical upper bound and filter extreme luxury/error spikes.Bedrooms (Discrete): Combined the 99th Percentile with a Logical Domain Cap of 9 rooms. This removed extreme outliers (like 50-bedroom entries) while preserving valid large-scale residential properties.2. Feature Engineering: Amenities AnalysisThe raw amenities column (stored as string-represented lists) was transformed into a numerical feature:amenities_count: Extracted the total count of features per listing using ast.literal_eval. This allows for multivariate analysis of how "property richness" correlates with price.3. Visual Honesty & IntegrityUnlike standard "blind" imputation, this project prioritizes Visual Honesty for categorical host metrics:Host-ID Grouping: Filled missing response rates by identifying a host's other active listings to ensure factual consistency.The "Missing" Label: Remaining nulls were explicitly labeled as "Missing" or "No Recent Activity" instead of being filled with a global median. This prevents "fake spikes" in charts and accurately visualizes data gaps.4. Review Score ConsolidationDimensionality Reduction: Dropped 6 redundant sub-score columns to focus on review_scores_rating.Neighborhood Imputation: Filled missing ratings using the Median of the specific Arrondissement, ensuring local quality trends are maintained.📊 Analytical ScopeThe cleaned dataset (viz_df) supports the following investigations:Univariate: Distribution of Prices, Bedroom counts, and Neighbourhood supply.Multivariate: Price vs. Neighbourhood (Boxplots), Amenities vs. Price (Scatter), and Room Type proportions.🚀 How to RunThe cleaning logic is modularized into the following pipeline:clean_bedrooms(df): Logic-based bedroom filling.clean_review_scores(df): Neighborhood-based rating imputation.clean_host_metrics_for_viz(df): Transparent host data labeling.engineer_features(df): Creation of amenities_count.remove_outliers_for_viz(df): Statistical filtering for visualization.
+### Outlier Management Strategy
+- **Price (Continuous)**: IQR method (Q3 + 1.5×IQR) for statistical filtering
+- **Bedrooms (Discrete)**: 99th percentile 
+
+### Feature Engineering
+- **amenities_count**: Extracted from string-represented lists to enable price correlation analysis
+
+### Data Integrity
+- **Visual Honesty**: Missing categorical metrics labeled explicitly ("Missing", "No Recent Activity")
+- **Host Consistency**: Nulls filled using host's other active listings when available
+- **Neighbourhood Imputation**: Review scores filled using arrondissement median
+
+### Analytical Scope
+- Univariate: Price, bedrooms, neighbourhood supply distributions
+- Multivariate: Price vs neighbourhood, amenities vs price, room type analysis
+- Correlations: Full numeric variable correlation matrix
+
+---
+
+
+## 🚀 Streamlit Dashboard
+
+An interactive web dashboard visualizing Airbnb Paris listings with comprehensive EDA-driven insights.
+
+### Features
+
+#### 📊 Interactive Filters
+- Price range slider (€)
+- Room type multi-select
+- Neighbourhood multi-select with smart defaults
+
+#### 📈 Visualizations (from EDA)
+- **Price Distribution** (linear + log scale) with mean/median indicators
+- **Room Type Distribution** (donut chart) with percentages
+- **Top 20 Neighbourhoods** (horizontal bar) with listing counts
+- **Price by Neighbourhood** (boxplot) — top 15 by median price
+- **Amenities vs Price** (scatter + trend line) colored by bedrooms
+- **Correlation Matrix** (heatmap) — numeric variables relationships
+- **Dataset Overview** — total listings, avg/median prices
+- **Sample Data Table** — browse filtered listings
+
+### Running the Dashboard
+
+```bash
+cd streamlit/
+streamlit run dashboard.py
+```
+
+Open browser to `http://localhost:8501`
+
+### Deployment
+
+Deploy to Streamlit Cloud:
+1. Push code to GitHub repository
+2. Go to [share.streamlit.io](https://share.streamlit.io)
+3. Connect your GitHub repo and deploy
+
+---
+
+# 📍 Airbnb Paris – Data Analysis & Dashboard
+
+Airbnb Listings and Reviews in Paris – Analysis of Trends, Pricing, and Market Insights
+
+### Dataset Source
+Download dataset: [Kaggle - Airbnb Paris](https://www.kaggle.com/datasets/abaghyangor/airbnb-paris/data)
+
+---
+
+## 📁 Project Structure
+
+```
+airbnb-paris/
+├── README.md                              # Project documentation
+├── data/
+│   ├── raw/                               # Original downloaded data
+│   │   ├── Listings.csv                   # Raw listings data
+│   │   └── Listings_data_dictionary.csv   # Data dictionary
+│   └── cleaned/                           # Processed data (parquet)
+├── notebooks/
+│   ├── EDA.ipynb                          # Exploratory Data Analysis
+│   └── eda-listing.ipynb                  # Additional EDA notebook
+└── streamlit/
+    ├── dashboard.py                       # Main dashboard application
+    └── paris_airbnb_cleaned.parquet       # Cleaned dataset (cached)
+```
+
+---
+
+
+## 📊 Key Insights
+
+- **Top Markets**: Top 5 neighbourhoods account for ~40% of all listings
+- **Price Variance**: Median price varies 2-3x across neighbourhoods
+- **Amenities Impact**: Properties with high amenity counts command 20-30% price premium
+- **Room Type Distribution**: Entire homes dominate the Paris market (~60%)
+
+## 🤝 Contributing
+
+Feel free to open issues or PRs for improvements to the analysis or dashboard.
+
+## 📝 License
+
+This project is for educational and analytical purposes.
