@@ -1,3 +1,32 @@
+# 📍 Airbnb Paris – Data Analysis & Dashboard
+
+Airbnb Listings and Reviews in Paris – Analysis of Trends, Pricing, and Market Insights
+
+
+### Dataset Source
+Download dataset: [Kaggle - Airbnb Paris](https://www.kaggle.com/datasets/abaghyangor/airbnb-paris/data)
+
+---
+
+## 📁 Project Structure
+
+```
+airbnb-paris/
+├── README.md                              # Project documentation
+├── data/
+│   ├── raw/                               # Original downloaded data
+│   │   ├── Listings.csv                   # Raw listings data
+│   │   └── Listings_data_dictionary.csv   # Data dictionary
+│   └── cleaned/                           # Processed data (parquet)
+├── notebooks/
+│   ├── EDA.ipynb                          # Exploratory Data Analysis
+│   └── eda-listing.ipynb                  # Additional EDA notebook
+└── streamlit/
+    ├── dashboard.py                       # Main dashboard application
+    └── paris_airbnb_cleaned.parquet       # Cleaned dataset (cached)
+```
+
+---
 
 ## 🛠️ Technical Stack
 
@@ -27,34 +56,6 @@ you can download the dataset using this link : https://www.kaggle.com/datasets/a
 - Univariate: Price, bedrooms, neighbourhood supply distributions
 - Multivariate: Price vs neighbourhood, amenities vs price, room type analysis
 - Correlations: Full numeric variable correlation matrix
-
----
-# 📍 Airbnb Paris – Data Analysis & Dashboard
-
-Airbnb Listings and Reviews in Paris – Analysis of Trends, Pricing, and Market Insights
-
-### Dataset Source
-Download dataset: [Kaggle - Airbnb Paris](https://www.kaggle.com/datasets/abaghyangor/airbnb-paris/data)
-
----
-
-## 📁 Project Structure
-
-```
-airbnb-paris/
-├── README.md                              # Project documentation
-├── data/
-│   ├── raw/                               # Original downloaded data
-│   │   ├── Listings.csv                   # Raw listings data
-│   │   └── Listings_data_dictionary.csv   # Data dictionary
-│   └── cleaned/                           # Processed data (parquet)
-├── notebooks/
-│   ├── EDA.ipynb                          # Exploratory Data Analysis
-│   └── eda-listing.ipynb                  # Additional EDA notebook
-└── streamlit/
-    ├── dashboard.py                       # Main dashboard application
-    └── paris_airbnb_cleaned.parquet       # Cleaned dataset (cached)
-```
 
 ---
 
@@ -92,8 +93,6 @@ Open browser to `http://localhost:8501`
 ### Deployment
 
 to have a look and see  dashboard go to => https://airbnb-paris.streamlit.app/
-
----
 
 ---
 
